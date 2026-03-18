@@ -1,0 +1,25 @@
+{
+  "name": "koki-farm",
+  "version": "1.0.0",
+  "description": "Sistem informasi berbasis web untuk mengelola usaha budidaya dan penjualan ikan koki.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanadd9347/sistem-manajemen-koki.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nanadd9347/sistem-manajemen-koki/issues"
+  },
+  "homepage": "https://github.com/nanadd9347/sistem-manajemen-koki#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.13"
+  }
+}

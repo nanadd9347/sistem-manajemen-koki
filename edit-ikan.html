@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Edit Ikan - Alfin Aquatic</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .btn-press:active {
+            transform: scale(0.96);
+        }
+        input, select, textarea {
+            transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+        
+        .sidebar-width { width: 280px; }
+        .desktop-main { margin-left: 280px; }
+        @media (max-width: 1024px) {
+            .desktop-main { margin-left: 0; }
+            .sidebar-width { width: 100%; }
+        }
+        @media (min-width: 768px) {
+            .mobile-only { display: none !important; }
+            .desktop-only { display: block !important; }
+        }
+        @media (max-width: 767px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; }
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover {
+            background-color: #f8fafc;
+            color: #059669;
+        }
+        .sidebar-link.active {
+            background: linear-gradient(to right, #ecfdf5, #d1fae5);
+            color: #059669;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+    
+    <!-- ==================== MOBILE VIEW ==================== -->
+    <div class="md:hidden max-w-[414px] mx-auto min-h-screen bg-gradient-to-b from-slate-50 to-white relative shadow-2xl overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-5 pt-12 pb-6 rounded-b-3xl shadow-soft relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-cyan-400/20 rounded-full blur-2xl"></div>
+            
+            <div class="relative z-10">
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="window.location.href='detail-ikan.html'" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press relative">
+                            <i class="fas fa-bell text-sm"></i>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-emerald-600"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-fish text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white text-lg font-bold">Edit Ikan</h1>
+                        <p class="text-emerald-100 text-xs font-medium">Ubah data ikan</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="px-5 py-6 pb-24 space-y-5">
+            
+            <!-- Info Ikan -->
+            <div class="glass-card rounded-2xl p-5 shadow-card">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white">
+                        <i class="fas fa-fish text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-800">Oranda Red Cap</h2>
+                        <p class="text-sm text-slate-500">ID: F001</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Edit -->
+            <div class="glass-card rounded-2xl p-5 shadow-card">
+                <form class="space-y-5">
+                    
+                    <!-- Upload Foto (Opsional) -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Foto Ikan</label>
+                        <div class="flex items-center gap-4">
+                            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white">
+                                <i class="fas fa-fish text-2xl"></i>
+                            </div>
+                            <div>
+                                <button type="button" class="px-4 py-2 rounded-lg bg-emerald-50 text-emerald-600 text-sm font-semibold hover:bg-emerald-100 transition-colors btn-press">
+                                    Ganti Gambar
+                                </button>
+                                <p class="text-xs text-slate-400 mt-1">Kosongkan jika tidak ingin mengubah</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Nama Ikan -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Ikan</label>
+                        <input type="text" value="Oranda Red Cap" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white transition-colors">
+                    </div>
+                    
+                    <!-- Grid 2 Kolom -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Jenis</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                <option selected>Oranda</option>
+                                <option>Ranchu</option>
+                                <option>Ryukin</option>
+                                <option>Lionhead</option>
+                                <option>Showa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Asal</label>
+                            <input type="text" value="China" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                        </div>
+                    </div>
+                    
+                    <!-- Grid 3 Kolom -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Harga</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">Rp</span>
+                                <input type="number" value="150000" class="w-full pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Stok</label>
+                            <input type="number" value="85" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Ukuran</label>
+                            <input type="text" value="12-15 cm" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                        </div>
+                    </div>
+                    
+                    <!-- Pilih Kolam -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Lokasi Kolam</label>
+                        <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                            <option value="A1" selected>Kolam A1 (Beton, 120 ekor)</option>
+                            <option value="A2">Kolam A2 (Beton, 150 ekor)</option>
+                            <option value="B1">Kolam B1 (Terpal, 250 ekor)</option>
+                            <option value="B2">Kolam B2 (Terpal, 200 ekor)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Status Kesehatan -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Status Kesehatan</label>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="status" class="w-4 h-4 text-emerald-600" checked>
+                                <span class="text-sm">Sehat</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="status" class="w-4 h-4 text-emerald-600">
+                                <span class="text-sm">Observasi</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="status" class="w-4 h-4 text-emerald-600">
+                                <span class="text-sm">Sakit</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Deskripsi -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
+                        <textarea rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">Oranda Red Cap adalah varian ikan koki dengan ciri khas kepala berwarna merah menyala. Memiliki tubuh bulat dan sirip yang indah.</textarea>
+                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="grid grid-cols-2 gap-3 pt-3">
+                        <button type="submit" class="py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                            <i class="fas fa-save mr-1"></i> Simpan Perubahan
+                        </button>
+                        <button type="button" onclick="window.location.href='detail-ikan.html'" class="py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press">
+                            <i class="fas fa-times mr-1"></i> Batal
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-6 py-3 pb-6 z-40 max-w-[414px] mx-auto shadow-soft">
+            <div class="flex justify-around items-center">
+                <a href="dashboard.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-home text-base"></i><span class="text-[9px] font-medium">Dashboard</span>
+                </a>
+                <a href="ikan.html" class="flex flex-col items-center gap-1.5 nav-item-active">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200">
+                        <i class="fas fa-fish text-base text-emerald-600"></i>
+                    </div>
+                    <span class="text-[9px] font-semibold text-emerald-600">Ikan</span>
+                </a>
+                <div class="relative -top-6">
+                    <button class="w-14 h-14 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white shadow-lg flex items-center justify-center text-xl">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <a href="kolam.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-water text-base"></i><span class="text-[9px] font-medium">Kolam</span>
+                </a>
+                <a href="akun.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-user text-base"></i><span class="text-[9px] font-medium">Akun</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- ==================== DESKTOP VIEW ==================== -->
+    <div class="hidden md:block">
+        <div class="flex min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+            <aside class="sidebar-width bg-white border-r border-slate-200 flex flex-col fixed h-full shadow-elegant z-50">
+                <div class="p-6 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-fish text-xl"></i>
+                        </div>
+                        <div><h1 class="text-lg font-bold text-slate-800">Alfin Aquatic</h1><p class="text-[10px] text-slate-500">Sistem Manajemen</p></div>
+                    </div>
+                </div>
+                <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                    <a href="dashboard.html" class="sidebar-link"><i class="fas fa-home w-5"></i><span>Dashboard</span></a>
+                    <a href="ikan.html" class="sidebar-link active"><i class="fas fa-fish w-5"></i><span>Data Ikan</span></a>
+                    <a href="kolam.html" class="sidebar-link"><i class="fas fa-water w-5"></i><span>Data Kolam</span></a>
+                    <a href="akun.html" class="sidebar-link"><i class="fas fa-user w-5"></i><span>Akun Admin</span></a>
+                </nav>
+                <div class="p-4 border-t border-slate-100">
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-50">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-slate-800">Admin</p>
+                            <p class="text-[10px] text-slate-500">admin@alfinaquatic.com</p>
+                        </div>
+                        <button class="w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors">
+                            <i class="fas fa-sign-out-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <main class="desktop-main flex-1 p-8 overflow-y-auto">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                                <i class="fas fa-fish text-emerald-600"></i> Edit Data Ikan
+                            </h1>
+                            <p class="text-slate-500 text-sm mt-1">Ubah informasi ikan Oranda Red Cap</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-emerald-50 transition-colors">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="glass-card rounded-2xl p-8 shadow-card">
+                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl mb-6">
+                            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white">
+                                <i class="fas fa-fish text-3xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-bold text-slate-800 text-xl">Oranda Red Cap</h2>
+                                <p class="text-sm text-slate-500">ID: F001 • Stok saat ini: 85 ekor</p>
+                            </div>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Ikan</label>
+                                    <input type="text" value="Oranda Red Cap" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Jenis Ikan</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                        <option selected>Oranda</option>
+                                        <option>Ranchu</option>
+                                        <option>Ryukin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Harga (Rp)</label>
+                                    <input type="number" value="150000" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Stok</label>
+                                    <input type="number" value="85" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Ukuran</label>
+                                    <input type="text" value="12-15 cm" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Asal Ikan</label>
+                                    <input type="text" value="China" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Lokasi Kolam</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                        <option selected>Kolam A1 (Beton, 120 ekor)</option>
+                                        <option>Kolam A2 (Beton, 150 ekor)</option>
+                                        <option>Kolam B1 (Terpal, 250 ekor)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Status Kesehatan</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center gap-2"><input type="radio" name="status" class="w-4 h-4 text-emerald-600" checked><span>Sehat</span></label>
+                                    <label class="flex items-center gap-2"><input type="radio" name="status" class="w-4 h-4 text-emerald-600"><span>Observasi</span></label>
+                                    <label class="flex items-center gap-2"><input type="radio" name="status" class="w-4 h-4 text-emerald-600"><span>Sakit</span></label>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-1">Deskripsi</label>
+                                <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">Oranda Red Cap adalah varian ikan koki dengan ciri khas kepala berwarna merah menyala. Memiliki tubuh bulat dan sirip yang indah. Sangat populer di kalangan penghobi ikan hias.</textarea>
+                            </div>
+                            
+                            <div class="flex gap-3 pt-4">
+                                <button type="submit" class="px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                                    <i class="fas fa-save mr-2"></i> Simpan Perubahan
+                                </button>
+                                <button type="button" onclick="window.location.href='detail-ikan.html'" class="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press">
+                                    <i class="fas fa-times mr-2"></i> Batal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Detail Kolam - Alfin Aquatic</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .btn-press:active {
+            transform: scale(0.96);
+        }
+        
+        .card-hover {
+            transition: all 0.4s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.15);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-item-active {
+            color: #059669;
+        }
+        .nav-item-active .nav-icon {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+        
+        /* Responsive Breakpoints */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none !important;
+            }
+            .desktop-only {
+                display: block !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .desktop-only {
+                display: none !important;
+            }
+            .mobile-only {
+                display: block !important;
+            }
+        }
+        
+        .sidebar-width {
+            width: 280px;
+        }
+        .desktop-main {
+            margin-left: 280px;
+        }
+        @media (max-width: 1024px) {
+            .desktop-main {
+                margin-left: 0;
+            }
+            .sidebar-width {
+                width: 100%;
+            }
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover {
+            background-color: #f8fafc;
+            color: #059669;
+        }
+        .sidebar-link.active {
+            background: linear-gradient(to right, #ecfdf5, #d1fae5);
+            color: #059669;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+    
+    <!-- ==================== MOBILE VIEW (< 768px) ==================== -->
+    <div class="md:hidden max-w-[414px] mx-auto min-h-screen bg-gradient-to-b from-slate-50 to-white relative shadow-2xl overflow-hidden">
+        
+        <!-- ==================== HEADER ==================== -->
+        <header class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-5 pt-12 pb-6 rounded-b-3xl shadow-soft relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-cyan-400/20 rounded-full blur-2xl animate-float"></div>
+            
+            <div class="relative z-10">
+                <!-- Top Bar with Back Button -->
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="window.location.href='kolam.html'" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press relative">
+                            <i class="fas fa-bell text-sm"></i>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-emerald-600"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Title Section -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-water text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white text-lg font-bold">Detail Kolam</h1>
+                        <p class="text-emerald-100 text-xs font-medium">Informasi lengkap kolam</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- ==================== MAIN CONTENT ==================== -->
+        <main class="px-5 py-6 pb-24 space-y-6">
+            
+            <!-- ==================== INFO KOLAM ==================== -->
+            <section>
+                <div class="glass-card rounded-2xl p-6 shadow-card">
+                    <div class="flex flex-col items-center">
+                        <!-- Icon Kolam -->
+                        <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-xl mb-4">
+                            <i class="fas fa-water text-4xl"></i>
+                        </div>
+                        
+                        <!-- Nama Kolam -->
+                        <h2 class="text-2xl font-bold text-slate-800 mb-1">Kolam A1</h2>
+                        
+                        <!-- Status -->
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 mb-3">
+                            <i class="fas fa-circle text-[6px] mr-1"></i> Aktif
+                        </span>
+                        
+                        <!-- Info Grid -->
+                        <div class="grid grid-cols-3 gap-3 w-full mt-2">
+                            <div class="text-center p-3 bg-slate-50 rounded-xl">
+                                <p class="text-xs text-slate-500">Tipe</p>
+                                <p class="font-bold text-slate-800">Beton</p>
+                            </div>
+                            <div class="text-center p-3 bg-slate-50 rounded-xl">
+                                <p class="text-xs text-slate-500">Ukuran</p>
+                                <p class="font-bold text-slate-800">3×4 m</p>
+                            </div>
+                            <div class="text-center p-3 bg-slate-50 rounded-xl">
+                                <p class="text-xs text-slate-500">Volume</p>
+                                <p class="font-bold text-slate-800">5.000 L</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ==================== PARAMETER AIR SEDERHANA ==================== -->
+            <section>
+                <h2 class="text-slate-800 text-sm font-bold flex items-center gap-2 mb-3">
+                    <span class="w-1 h-5 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full"></span>
+                    Parameter Air
+                </h2>
+                
+                <div class="glass-card rounded-2xl p-4 shadow-card">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mb-2">
+                                <i class="fas fa-thermometer-half text-xl"></i>
+                            </div>
+                            <p class="text-xs text-slate-500">Suhu</p>
+                            <p class="text-lg font-bold text-slate-800">26°C</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-teal-100 flex items-center justify-center text-teal-600 mb-2">
+                                <i class="fas fa-droplet text-xl"></i>
+                            </div>
+                            <p class="text-xs text-slate-500">pH</p>
+                            <p class="text-lg font-bold text-slate-800">7.2</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 mx-auto rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 mb-2">
+                                <i class="fas fa-wind text-xl"></i>
+                            </div>
+                            <p class="text-xs text-slate-500">Oksigen</p>
+                            <p class="text-lg font-bold text-slate-800">6.5 mg/L</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ==================== INFORMASI KOLAM ==================== -->
+            <section>
+                <h2 class="text-slate-800 text-sm font-bold flex items-center gap-2 mb-3">
+                    <span class="w-1 h-5 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full"></span>
+                    Informasi Kolam
+                </h2>
+                
+                <div class="glass-card rounded-2xl p-4 shadow-card space-y-3">
+                    <div class="flex justify-between pb-2 border-b border-slate-100">
+                        <span class="text-sm text-slate-500">Kapasitas Maks</span>
+                        <span class="font-semibold text-slate-800">120 ekor</span>
+                    </div>
+                    <div class="flex justify-between pb-2 border-b border-slate-100">
+                        <span class="text-sm text-slate-500">Jumlah Ikan Saat Ini</span>
+                        <span class="font-semibold text-emerald-600">85 ekor</span>
+                    </div>
+                    <div class="flex justify-between pb-2 border-b border-slate-100">
+                        <span class="text-sm text-slate-500">Sisa Kapasitas</span>
+                        <span class="font-semibold text-slate-800">35 ekor</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-slate-500">Terisi</span>
+                        <span class="font-semibold text-slate-800">70%</span>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ==================== DAFTAR IKAN DI KOLAM ==================== -->
+            <section>
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-slate-800 text-sm font-bold flex items-center gap-2">
+                        <span class="w-1 h-5 bg-gradient-to-b from-emerald-500 to-teal-600 rounded-full"></span>
+                        Ikan di Kolam Ini
+                    </h2>
+                    <button class="text-[10px] font-semibold text-emerald-600 hover:text-emerald-700">Lihat Semua</button>
+                </div>
+                
+                <div class="glass-card rounded-2xl p-4 shadow-card">
+                    <div class="space-y-3">
+                        <!-- Ikan 1 - dengan link ke detail ikan -->
+                        <div onclick="window.location.href='detail-ikan.html'" class="flex items-center gap-3 pb-3 border-b border-slate-100 cursor-pointer hover:bg-slate-50 transition-colors p-2 rounded-lg">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-slate-800">Oranda Red Cap</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs text-slate-500">85 ekor</span>
+                                    <span class="text-[8px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Stabil</span>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-emerald-600"></i>
+                        </div>
+                        
+                        <!-- Ikan 2 -->
+                        <div onclick="window.location.href='detail-ikan.html'" class="flex items-center gap-3 pb-3 border-b border-slate-100 cursor-pointer hover:bg-slate-50 transition-colors p-2 rounded-lg">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-slate-800">Ryukin Gold</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs text-slate-500">120 ekor</span>
+                                    <span class="text-[8px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Stabil</span>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-emerald-600"></i>
+                        </div>
+                        
+                        <!-- Ikan 3 -->
+                        <div onclick="window.location.href='detail-ikan.html'" class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 transition-colors p-2 rounded-lg">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white">
+                                <i class="fas fa-fish"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold text-slate-800">Oranda Panda</p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-xs text-slate-500">77 ekor</span>
+                                    <span class="text-[8px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Stabil</span>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-emerald-600"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Ringkasan Stok Cepat -->
+                    <div class="mt-4 pt-3 border-t border-slate-100">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-slate-500">Total Ikan di Kolam:</span>
+                            <span class="font-bold text-emerald-600">282 ekor</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ==================== TOMBOL AKSI ==================== -->
+            <section>
+                <!-- Baris 1: Edit & Hapus -->
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <button class="py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press flex items-center justify-center gap-2">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit Kolam</span>
+                    </button>
+                    <button class="py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press flex items-center justify-center gap-2">
+                        <i class="fas fa-trash"></i>
+                        <span>Hapus</span>
+                    </button>
+                </div>
+                
+                <!-- Baris 2: Kelola Ikan (terintegrasi dengan fitur stok) -->
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <button onclick="window.location.href='tambah-stok-ikan.html'" class="py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press flex items-center justify-center gap-2">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Tambah Ikan</span>
+                    </button>
+                    <button onclick="window.location.href='pindah-ikan.html'" class="py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press flex items-center justify-center gap-2">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Pindah Ikan</span>
+                    </button>
+                </div>
+                
+                <!-- Tombol Kelola Stok Massal -->
+                <button class="w-full py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press flex items-center justify-center gap-2">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Kelola Stok Ikan</span>
+                </button>
+            </section>
+            
+        </main>
+        
+        <!-- ==================== BOTTOM NAVIGATION ==================== -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-6 py-3 pb-6 z-40 max-w-[414px] mx-auto shadow-soft">
+            <div class="flex justify-around items-center">
+                <a href="dashboard.html" class="flex flex-col items-center gap-1.5 nav-item text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <div class="nav-icon w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-50">
+                        <i class="fas fa-home text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-medium">Dashboard</span>
+                </a>
+                
+                <a href="ikan.html" class="flex flex-col items-center gap-1.5 nav-item text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <div class="nav-icon w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-50">
+                        <i class="fas fa-fish text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-medium">Ikan</span>
+                </a>
+                
+                <div class="relative -top-6">
+                    <button class="w-14 h-14 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/40 flex items-center justify-center text-xl btn-press hover:scale-110 hover:shadow-floating hover:rotate-90 transition-all">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                
+                <a href="kolam.html" class="flex flex-col items-center gap-1.5 nav-item nav-item-active transition-all btn-press">
+                    <div class="nav-icon w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200">
+                        <i class="fas fa-water text-base text-emerald-600"></i>
+                    </div>
+                    <span class="text-[9px] font-semibold text-emerald-600">Kolam</span>
+                </a>
+                
+                <a href="akun.html" class="flex flex-col items-center gap-1.5 nav-item text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <div class="nav-icon w-10 h-10 rounded-full flex items-center justify-center hover:bg-emerald-50">
+                        <i class="fas fa-user text-base"></i>
+                    </div>
+                    <span class="text-[9px] font-medium">Akun</span>
+                </a>
+            </div>
+        </nav>
+        
+    </div>
+    
+    <!-- ==================== DESKTOP VIEW (≥ 768px) ==================== -->
+    <div class="hidden md:block">
+        <div class="flex min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+            
+            <!-- ==================== SIDEBAR ==================== -->
+            <aside class="sidebar-width bg-white border-r border-slate-200 flex flex-col fixed h-full shadow-elegant z-50">
+                <div class="p-6 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-fish text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold text-slate-800">Alfin Aquatic</h1>
+                            <p class="text-[10px] text-slate-500">Sistem Manajemen</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                    <a href="dashboard.html" class="sidebar-link">
+                        <i class="fas fa-home w-5"></i><span>Dashboard</span>
+                    </a>
+                    <a href="ikan.html" class="sidebar-link">
+                        <i class="fas fa-fish w-5"></i><span>Data Ikan</span>
+                    </a>
+                    <a href="kolam.html" class="sidebar-link active">
+                        <i class="fas fa-water w-5"></i><span>Data Kolam</span>
+                    </a>
+                    <a href="akun.html" class="sidebar-link">
+                        <i class="fas fa-user w-5"></i><span>Akun Admin</span>
+                    </a>
+                </nav>
+                
+                <div class="p-4 border-t border-slate-100">
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-50">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-slate-800">Admin</p>
+                            <p class="text-[10px] text-slate-500">admin@alfinaquatic.com</p>
+                        </div>
+                        <button class="w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors">
+                            <i class="fas fa-sign-out-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main Content Desktop -->
+            <main class="desktop-main flex-1 p-8 overflow-y-auto">
+                <div class="max-w-6xl mx-auto">
+                    
+                    <!-- Top Header -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                                <i class="fas fa-water text-emerald-600"></i>
+                                Detail Kolam A1
+                            </h1>
+                            <p class="text-slate-500 text-sm mt-1">Informasi lengkap dan manajemen kolam</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-emerald-50 transition-colors relative">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+                        </button>
+                    </div>
+                    
+                    <!-- Grid 2 Kolom -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Kolom Kiri -->
+                        <div class="md:col-span-1 space-y-6">
+                            <!-- Card Info Kolam -->
+                            <div class="glass-card rounded-2xl p-6 shadow-card sticky top-24">
+                                <div class="flex flex-col items-center">
+                                    <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-xl mb-4">
+                                        <i class="fas fa-water text-4xl"></i>
+                                    </div>
+                                    <h2 class="text-2xl font-bold text-slate-800">Kolam A1</h2>
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 mt-2 mb-4">Aktif</span>
+                                    
+                                    <div class="w-full grid grid-cols-3 gap-2">
+                                        <div class="text-center"><p class="text-xs text-slate-500">Tipe</p><p class="font-bold">Beton</p></div>
+                                        <div class="text-center"><p class="text-xs text-slate-500">Ukuran</p><p class="font-bold">3×4m</p></div>
+                                        <div class="text-center"><p class="text-xs text-slate-500">Volume</p><p class="font-bold">5000L</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Parameter Air -->
+                            <div class="glass-card rounded-2xl p-6 shadow-card">
+                                <h2 class="text-lg font-bold text-slate-800 mb-4">Parameter Air</h2>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                                <i class="fas fa-thermometer-half"></i>
+                                            </div>
+                                            <span>Suhu</span>
+                                        </div>
+                                        <span class="font-bold">26°C</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
+                                                <i class="fas fa-droplet"></i>
+                                            </div>
+                                            <span>pH</span>
+                                        </div>
+                                        <span class="font-bold">7.2</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600">
+                                                <i class="fas fa-wind"></i>
+                                            </div>
+                                            <span>Oksigen</span>
+                                        </div>
+                                        <span class="font-bold">6.5 mg/L</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Kolom Kanan -->
+                        <div class="md:col-span-2 space-y-6">
+                            
+                            <!-- Informasi Kolam -->
+                            <div class="glass-card rounded-2xl p-6 shadow-card">
+                                <h2 class="text-lg font-bold text-slate-800 mb-4">Informasi Kolam</h2>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="p-4 bg-slate-50 rounded-xl">
+                                        <p class="text-sm text-slate-500">Kapasitas Maks</p>
+                                        <p class="text-2xl font-bold text-slate-800">120 ekor</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl">
+                                        <p class="text-sm text-slate-500">Jumlah Ikan</p>
+                                        <p class="text-2xl font-bold text-emerald-600">85 ekor</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl">
+                                        <p class="text-sm text-slate-500">Sisa Kapasitas</p>
+                                        <p class="text-2xl font-bold text-slate-800">35 ekor</p>
+                                    </div>
+                                    <div class="p-4 bg-slate-50 rounded-xl">
+                                        <p class="text-sm text-slate-500">Terisi</p>
+                                        <p class="text-2xl font-bold text-slate-800">70%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Daftar Ikan -->
+                            <div class="glass-card rounded-2xl p-6 shadow-card">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h2 class="text-lg font-bold text-slate-800">Ikan di Kolam Ini</h2>
+                                    <button class="text-sm text-emerald-600 font-semibold">Lihat Semua</button>
+                                </div>
+                                <div class="space-y-3">
+                                    <div onclick="window.location.href='detail-ikan.html'" class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white">
+                                                <i class="fas fa-fish"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Oranda Red Cap</p>
+                                                <p class="text-xs text-slate-500">85 ekor</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-emerald-600"></i>
+                                    </div>
+                                    <div onclick="window.location.href='detail-ikan.html'" class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white">
+                                                <i class="fas fa-fish"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Ryukin Gold</p>
+                                                <p class="text-xs text-slate-500">120 ekor</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-emerald-600"></i>
+                                    </div>
+                                    <div onclick="window.location.href='detail-ikan.html'" class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-300 to-orange-500 flex items-center justify-center text-white">
+                                                <i class="fas fa-fish"></i>
+                                            </div>
+                                            <div>
+                                                <p class="font-semibold text-slate-800">Oranda Panda</p>
+                                                <p class="text-xs text-slate-500">77 ekor</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-emerald-600"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tombol Aksi Desktop -->
+                            <div class="grid grid-cols-3 gap-3">
+                                <button class="py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                                    <i class="fas fa-edit mr-2"></i> Edit
+                                </button>
+                                <button class="py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                                    <i class="fas fa-plus-circle mr-2"></i> Tambah Ikan
+                                </button>
+                                <button class="py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press">
+                                    <i class="fas fa-exchange-alt mr-2"></i> Pindah
+                                </button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </main>
+        </div>
+    </div>
+    
+</body>
+</html>

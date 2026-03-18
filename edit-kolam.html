@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Edit Kolam - Alfin Aquatic</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .btn-press:active {
+            transform: scale(0.96);
+        }
+        input, select, textarea {
+            transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #059669;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+        
+        .sidebar-width { width: 280px; }
+        .desktop-main { margin-left: 280px; }
+        @media (max-width: 1024px) {
+            .desktop-main { margin-left: 0; }
+            .sidebar-width { width: 100%; }
+        }
+        @media (min-width: 768px) {
+            .mobile-only { display: none !important; }
+            .desktop-only { display: block !important; }
+        }
+        @media (max-width: 767px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; }
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover {
+            background-color: #f8fafc;
+            color: #059669;
+        }
+        .sidebar-link.active {
+            background: linear-gradient(to right, #ecfdf5, #d1fae5);
+            color: #059669;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+    
+    <!-- ==================== MOBILE VIEW ==================== -->
+    <div class="md:hidden max-w-[414px] mx-auto min-h-screen bg-gradient-to-b from-slate-50 to-white relative shadow-2xl overflow-hidden">
+        
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 px-5 pt-12 pb-6 rounded-b-3xl shadow-soft relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-cyan-400/20 rounded-full blur-2xl"></div>
+            
+            <div class="relative z-10">
+                <div class="flex justify-between items-center mb-4">
+                    <button onclick="window.location.href='detail-kolam.html'" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <button class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-all btn-press relative">
+                            <i class="fas fa-bell text-sm"></i>
+                            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-emerald-600"></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-water text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white text-lg font-bold">Edit Kolam</h1>
+                        <p class="text-emerald-100 text-xs font-medium">Ubah data kolam</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="px-5 py-6 pb-24 space-y-5">
+            
+            <!-- Info Kolam -->
+            <div class="glass-card rounded-2xl p-5 shadow-card">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white">
+                        <i class="fas fa-water text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-slate-800">Kolam A1</h2>
+                        <p class="text-sm text-slate-500">ID: K001 • 85/120 ekor</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Edit Kolam -->
+            <div class="glass-card rounded-2xl p-5 shadow-card">
+                <form class="space-y-5">
+                    
+                    <!-- Nama Kolam -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Kolam</label>
+                        <input type="text" value="Kolam A1" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white transition-colors">
+                    </div>
+                    
+                    <!-- Tipe Kolam -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Tipe Kolam</label>
+                        <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                            <option value="beton" selected>Beton</option>
+                            <option value="terpal">Terpal</option>
+                            <option value="fiber">Fiber</option>
+                            <option value="tanah">Tanah</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Grid Ukuran -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Panjang (m)</label>
+                            <input type="number" step="0.1" value="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Lebar (m)</label>
+                            <input type="number" step="0.1" value="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                        </div>
+                    </div>
+                    
+                    <!-- Kapasitas -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Kapasitas Maksimal (ekor)</label>
+                        <input type="number" value="120" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                    </div>
+                    
+                    <!-- Volume Air -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Volume Air (liter)</label>
+                        <input type="number" value="5000" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                    </div>
+                    
+                    <!-- Parameter Air -->
+                    <div class="bg-emerald-50 p-4 rounded-xl">
+                        <h3 class="font-semibold text-emerald-800 mb-3 text-sm">Parameter Air</h3>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div>
+                                <label class="block text-xs text-slate-600 mb-1">Suhu (°C)</label>
+                                <input type="number" value="26" class="w-full px-3 py-2 rounded-lg border border-emerald-200 bg-white/70 focus:bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-600 mb-1">pH</label>
+                                <input type="number" step="0.1" value="7.2" class="w-full px-3 py-2 rounded-lg border border-emerald-200 bg-white/70 focus:bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-600 mb-1">Oksigen</label>
+                                <input type="number" step="0.1" value="6.5" class="w-full px-3 py-2 rounded-lg border border-emerald-200 bg-white/70 focus:bg-white">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Status Kolam</label>
+                        <div class="flex items-center gap-4">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="status" class="w-4 h-4 text-emerald-600" checked>
+                                <span class="text-sm">Aktif</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="status" class="w-4 h-4 text-emerald-600">
+                                <span class="text-sm">Nonaktif</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Tombol Aksi -->
+                    <div class="grid grid-cols-2 gap-3 pt-3">
+                        <button type="submit" class="py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                            <i class="fas fa-save mr-1"></i> Simpan Perubahan
+                        </button>
+                        <button type="button" onclick="window.location.href='detail-kolam.html'" class="py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press">
+                            <i class="fas fa-times mr-1"></i> Batal
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </main>
+        
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-6 py-3 pb-6 z-40 max-w-[414px] mx-auto shadow-soft">
+            <div class="flex justify-around items-center">
+                <a href="dashboard.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-home text-base"></i><span class="text-[9px] font-medium">Dashboard</span>
+                </a>
+                <a href="ikan.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-fish text-base"></i><span class="text-[9px] font-medium">Ikan</span>
+                </a>
+                <div class="relative -top-6">
+                    <button class="w-14 h-14 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white shadow-lg flex items-center justify-center text-xl">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <a href="kolam.html" class="flex flex-col items-center gap-1.5 nav-item-active">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200">
+                        <i class="fas fa-water text-base text-emerald-600"></i>
+                    </div>
+                    <span class="text-[9px] font-semibold text-emerald-600">Kolam</span>
+                </a>
+                <a href="akun.html" class="flex flex-col items-center gap-1.5 text-slate-400 hover:text-emerald-600 transition-all btn-press">
+                    <i class="fas fa-user text-base"></i><span class="text-[9px] font-medium">Akun</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- ==================== DESKTOP VIEW ==================== -->
+    <div class="hidden md:block">
+        <div class="flex min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+            <aside class="sidebar-width bg-white border-r border-slate-200 flex flex-col fixed h-full shadow-elegant z-50">
+                <div class="p-6 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-fish text-xl"></i>
+                        </div>
+                        <div><h1 class="text-lg font-bold text-slate-800">Alfin Aquatic</h1><p class="text-[10px] text-slate-500">Sistem Manajemen</p></div>
+                    </div>
+                </div>
+                <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                    <a href="dashboard.html" class="sidebar-link"><i class="fas fa-home w-5"></i><span>Dashboard</span></a>
+                    <a href="ikan.html" class="sidebar-link"><i class="fas fa-fish w-5"></i><span>Data Ikan</span></a>
+                    <a href="kolam.html" class="sidebar-link active"><i class="fas fa-water w-5"></i><span>Data Kolam</span></a>
+                    <a href="akun.html" class="sidebar-link"><i class="fas fa-user w-5"></i><span>Akun Admin</span></a>
+                </nav>
+                <div class="p-4 border-t border-slate-100">
+                    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-50">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-slate-800">Admin</p>
+                            <p class="text-[10px] text-slate-500">admin@alfinaquatic.com</p>
+                        </div>
+                        <button class="w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors">
+                            <i class="fas fa-sign-out-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+            
+            <main class="desktop-main flex-1 p-8 overflow-y-auto">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h1 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
+                                <i class="fas fa-water text-emerald-600"></i> Edit Data Kolam
+                            </h1>
+                            <p class="text-slate-500 text-sm mt-1">Ubah informasi kolam A1</p>
+                        </div>
+                        <button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-emerald-50 transition-colors">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="glass-card rounded-2xl p-8 shadow-card">
+                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl mb-6">
+                            <div class="w-20 h-20 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white">
+                                <i class="fas fa-water text-3xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-bold text-slate-800 text-xl">Kolam A1</h2>
+                                <p class="text-sm text-slate-500">ID: K001 • 85 ekor / 120 ekor</p>
+                            </div>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Kolam</label>
+                                    <input type="text" value="Kolam A1" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Tipe Kolam</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                        <option selected>Beton</option>
+                                        <option>Terpal</option>
+                                        <option>Fiber</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Panjang (m)</label>
+                                    <input type="number" step="0.1" value="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Lebar (m)</label>
+                                    <input type="number" step="0.1" value="4" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Volume (L)</label>
+                                    <input type="number" value="5000" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Kapasitas (ekor)</label>
+                                    <input type="number" value="120" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Status</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white/70 focus:bg-white">
+                                        <option selected>Aktif</option>
+                                        <option>Nonaktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-emerald-50 p-4 rounded-xl">
+                                <h3 class="font-semibold text-emerald-800 mb-3">Parameter Air</h3>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="block text-xs text-slate-600 mb-1">Suhu (°C)</label>
+                                        <input type="number" value="26" class="w-full px-4 py-2 rounded-lg border border-emerald-200 bg-white focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-600 mb-1">pH</label>
+                                        <input type="number" step="0.1" value="7.2" class="w-full px-4 py-2 rounded-lg border border-emerald-200 bg-white focus:bg-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-slate-600 mb-1">Oksigen</label>
+                                        <input type="number" step="0.1" value="6.5" class="w-full px-4 py-2 rounded-lg border border-emerald-200 bg-white focus:bg-white">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-3 pt-4">
+                                <button type="submit" class="px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold shadow-md hover:shadow-lg transition-all btn-press">
+                                    <i class="fas fa-save mr-2"></i> Simpan Perubahan
+                                </button>
+                                <button type="button" onclick="window.location.href='detail-kolam.html'" class="px-8 py-3 rounded-xl bg-slate-100 text-slate-600 font-semibold hover:bg-slate-200 transition-all btn-press">
+                                    <i class="fas fa-times mr-2"></i> Batal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
